@@ -1,0 +1,78 @@
+<!-- <form (ngSubmit)="save(myForm);" #myForm="ngForm"> -->
+  <form (ngSubmit)="save(myForm);" #myForm="ngForm">
+    <mat-form-field class="example-full-width">
+        <mat-label>שם פרטי</mat-label>
+        <input matInput  name="FirstName" [(ngModel)]="userList.FirstName" (changes)="saveName()"  #fName="ngModel"  required>
+    </mat-form-field>
+<br>
+    <mat-form-field class="example-full-width">
+      <mat-label>שם משפחה</mat-label>
+      <input matInput  name="LastName" [(ngModel)]="userList.LastName"  #lName="ngModel" required>  
+  </mat-form-field>
+<br>
+    
+    <mat-form-field class="example-full-width">
+      <mat-label>תעודת זהות</mat-label>
+      <input matInput type="text"  name="UserId" [(ngModel)]="userList.UserId" #id="ngModel" minlength="9" maxlength="9" required>
+  </mat-form-field>
+  <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>תאריך לידה</mat-label>
+      <input matInput type="datetime" name="DateOfBirth" [(ngModel)]="userList.DateOfBirth" #dateBirth="ngModel" [matDatepicker]="picker" required>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+<br>
+  
+
+    <mat-form-field appearance="fill">
+      <mat-label>מין</mat-label>
+      <mat-select name="Kind" [(ngModel)]="userList.Kind" #kind="ngModel" required>
+        <mat-option value="זכר" >זכר </mat-option>
+        <mat-option value="נקבה">נקבה</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>קופת חולים</mat-label>
+      <mat-select name="Hmo" [(ngModel)]="userList.Hmo" #hmo="ngModel" required="">
+        <mat-option value="מכבי">מכבי</mat-option>
+        <mat-option value="לאומית">לאומית</mat-option>
+        <mat-option value="כללית">כללית</mat-option>
+        <mat-option value="מאוחדת">מאוחדת</mat-option>
+      </mat-select>
+    </mat-form-field>
+<br>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">עדכון פרטים</button>
+</form>
+<form #myChild="ngForm">
+  <mat-form-field class="example-full-width">
+      <mat-label>שם פרטי</mat-label>
+      <input matInput  name="FirstName" [(ngModel)]="Child.FirstName" #fName="ngModel"  required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="example-full-width">
+      <mat-label>תעודת זהות</mat-label>
+      <input matInput type="text"  name="ChildId" [(ngModel)]="Child.ChildId" #id="ngModel" minlength="9" maxlength="9" required>
+  </mat-form-field>
+  <br>
+
+  <mat-form-field appearance="fill">
+      <mat-label>תאריך לידה</mat-label>
+      <input matInput name="DateOfBirth" [(ngModel)]="Child.DateOfBirth" #dateBirth="ngModel" [matDatepicker]="picker1" required>
+      <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <br>
+
+    <button id="addC" mat-mini-fab color="primary" type="submit" [disabled]="!myChild.valid" (click)=" addChild()">
+      <mat-icon>+1</mat-icon>
+    </button>
+</form>
+
+
+<!-- <button (click)=" save()">save</button> -->
