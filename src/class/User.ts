@@ -8,6 +8,6 @@ public LastName:string,
 public Kind:string,
 public DateOfBirth:Date,
 public Hmo:string,
-// public Child:Child[],
+//  public Child:Child[],
     ){}
 }

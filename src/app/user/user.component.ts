@@ -16,11 +16,11 @@ export class UserComponent implements OnInit,OnDestroy {
 
   userList: User = new User(null,null, null,null, null, null);
   Child:Child=new Child(null,null,null,null)
-  childList:Child=new Child(null,null,null,null)
+  childList:Child[]=[]
   constructor(public userService: UserService, public route: Router,public childService:ChildService) { }
   ngOnInit() {
     this.userList = this.userService.getFromStorage();
-    // console.log(this.userService.getFromStorage());
+    console.log(this.userService.getFromStorage());
   }
   ngOnDestroy() {
     this.userService.saveInStorage(this.userList);
@@ -28,18 +28,19 @@ export class UserComponent implements OnInit,OnDestroy {
 
   save(f)
   {
-    alert(this.userList.FirstName)
-    alert(this.userList.UserId)
-    alert(this.userList.Hmo)
-    alert(this.userList.Kind)
 
-    this.userService.RegisterUser(this.userList).subscribe((succ) => {
-   this.userService.saveInStorage(this.userList);
+   localStorage.setItem('userId',this.userList.UserId);
+
+    alert(localStorage.getItem('userId'));
+
+
+   this.userService.RegisterUser(this.userList).subscribe((succ) => {
+  // this.userService.saveInStorage(this.userList);
       alert("good");
        }
          , (err) => {
         alert("bad");
-          });
+         });
     // for (let index = 0; index < this.arrChildren.length; index++) {
     // this.arrChildren[index].ParentId=this.userList.UserId
     //  }
@@ -51,23 +52,22 @@ export class UserComponent implements OnInit,OnDestroy {
   
   f.reset();
   alert("המידע נשמר בהצלחה")
-  alert(this.userService.getFromStorage().id)
+ 
   }
   saveName(){
     this.userService.saveInStorage(this.userList);
   }
   addChild(){
-    
-    
-    this.childService.RegisterChilren(this.Child).subscribe((succ) => {
+    this.Child.ParentId=(localStorage.getItem('userId'));
+
+      this.childService.RegisterChilren(this.Child).subscribe((succ) => {
    alert("good");
     }
       , (err) => {
      alert("bad");
       });
-      this.Child.ParentId=this.userService.getFromStorage().UserId;
       
     alert(this.Child.ParentId);
-   this.Child=new Child(null,null,null,null)
+   this.Child=new Child(null,null,null,null);
   }
 }
